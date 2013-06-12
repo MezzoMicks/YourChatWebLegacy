@@ -1,0 +1,14 @@
+ALTER TABLE chatuser DROP CONSTRAINT FK_chatuser_PROFILE_ID
+ALTER TABLE privatemessage DROP CONSTRAINT FK_privatemessage_SENDER_ID
+ALTER TABLE privatemessage DROP CONSTRAINT FK_privatemessage_RECIPIENT_ID
+ALTER TABLE profile DROP CONSTRAINT FK_profile_AVATAR_ID
+ALTER TABLE image DROP CONSTRAINT FK_image_profile_id
+ALTER TABLE friendlist DROP CONSTRAINT FK_friendlist_profile_id
+ALTER TABLE friendlistuser DROP CONSTRAINT FK_friendlistuser_friendlist_id
+ALTER TABLE friendlistuser DROP CONSTRAINT FK_friendlistuser_USERENTITY_ID
+DROP TABLE chatuser
+DROP TABLE privatemessage
+DROP TABLE profile
+DROP TABLE image
+DROP TABLE friendlist
+DROP TABLE friendlistuser

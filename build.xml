@@ -1,0 +1,57 @@
+<project name="YourChatWeb" basedir=".">
+	<description>
+        simple example build file
+    </description>
+	<!-- set global properties for this build -->
+	<property name="build" location="build/classes" />
+	<property name="webContent" location="WebContent" />
+	<property name="archive" location="archive" />
+	<property name="hfPlugin" location="../YourChatHentaiFoundryPlugin" />
+	
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${archive}" />
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${archive}" />
+	</target>
+	
+	<target name="prepareLib" >
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<move todir="${archive}/WEB-INF/lib">
+			<fileset dir="${archive}">
+				<include name="*.jar"/>
+			</fileset>
+		</move>
+		<copy todir="${archive}/WEB-INF/lib">
+			<fileset dir="${hfPlugin}/lib">
+				<include name="*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="buildWAR">
+		<antcall target="clean"/>
+		<antcall target="init"/>
+		<!--
+		<ant antfile="${hfPlugin}/build.xml" target = "buildJAR" />
+		-->
+		<antcall target="prepareLib"/>
+		<war destfile="${archive}/YourChatWeb.war">
+			<classes dir="${build}">
+				<include name="**/*" />
+			</classes>
+			<fileset dir="${webContent}">
+				<include name="**/*" />
+			</fileset>
+			<fileset dir="${archive}">
+				<include name="WEB-INF/lib/*" />
+			</fileset>
+		</war>
+	</target>
+
+</project>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+
+<link href="http://jasny.github.com/bootstrap/assets/css/bootstrap.css"
+	rel="stylesheet" />
+<script src="http://jasny.github.com/bootstrap/assets/js/jquery.js"
+	type="text/javascript"></script>
+<script
+	src="http://jasny.github.com/bootstrap/assets/js/bootstrap-fileupload.js"
+	type="text/javascript"></script>
+<script
+	src="http://jasny.github.com/bootstrap/assets/js/bootstrap-tab.js"
+	type="text/javascript"></script>
+<script
+	src="http://jasny.github.com/bootstrap/assets/js/bootstrap-carousel.js"
+	type="text/javascript"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		var editmode = false;
+
+		function editable() {
+			if (editmode) {
+				$('.editable').css('visibility', 'hidden');
+				editmode = false;
+
+			} else {
+				$('.editable').css('visibility', 'visible');
+				editmode = true;
+			}
+			return false;
+		}
+	</script>
+	<div class="well" style="margin: 50px auto; width: 600px;">
+		<div class="tab-content">
+			<div class="media" id="profileHead">
+				<div
+					style="position: relative; margin-left: 10px; width: 160px; height: 160px; float: left">
+					<a class="pull-left" href="#"> <img class="media-object"
+						style="vertical-align: top; width: 160px; height: 160px"
+						src="http://placehold.it/160x160.png"
+						data-src="http://placehold.it/160x160.png">
+					</a>
+				</div>
+				<div
+					style="position: relative; padding: 10px; overflow: auto; height: 160px;">
+					<h3>DerTyp</h3>
+
+					<p>Wuppertal</p>
+					<p>21 Jahre alt</p>
+					<p>
+						<i>Letzter Login am 16.01.2013</i>
+					</p>
+				</div>
+			</div>
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#about" data-toggle="tab">About</a></li>
+				<li><a href="#profileGallery" data-toggle="tab">Gallery</a></li>
+				<li><a href="#friends" data-toggle="tab">Friends</a></li>
+			</ul>
+			<div class="tab-content"
+				style="padding: 0; height: 240px; overflow: auto">
+				<div id="about" class="tab-pane active">An der Theogonie wird
+					das Chaos an den Anfang gestellt. Die Welt wird bei Hesiod nicht
+					aus dem Nichts geschaffen; es gibt schon Materie, jedoch keine Form
+					und keine Ordnung. Aus dem Chaos entsteht als erste
+					Göttergeneration die Erde Gaia, die Unterwelt Tartaros, die Liebe
+					Eros, die Finsternis Erebos und die Nacht Nyx. Aus der Verbindung
+					von Nyx und Erebos gehen der Tag Hemera und die Luft Aither hervor,
+					Nyx bringt aus sich selbst eine Reihe von Gottheiten hervor, die
+					entweder Personifikationen von mit der Nacht assoziierten
+					Phänomenen oder von menschlichen Übeln sind. Der größte Teil der
+					griechischen Götterwelt wird auf Gaia zurückgeführt, die aus sich
+					selbst das Meer Pontos, die Berge Ourea und den Himmel Uranos
+					hervorbringt und insbesondere mit Uranos eine Vielzahl weiterer
+					Nachkommen hat. Neben der Herkunft der Götter wird in der Theogonie
+					von der Abfolge der Herrschaft über die Welt erzählt, die in den
+					meisten griechischen Entstehungsmythen eine zentrale Rolle spielt.
+					Der erste Herrscher über die Welt, Uranos, wird von seinem Sohn,
+					dem Titanen Kronos, entmannt und entmachtet, woraufhin die Titanen
+					über die Welt herrschen. Die Titanen werden wiederum von Kronos'
+					Sohn Zeus gestürzt, im Anschluss beginnt die Herrschaft der
+					olympischen Götter. Zeus sichert seine Herrschaft, indem er seine
+					schwangere Gattin Metis verschlingt, da es deren ungeborenem Sohn
+					bestimmt gewesen wäre, die Stelle des Zeus einzunehmen.[5]</div>
+				<div id="profileGallery" >
+					<div class="carousel slide">
+						<ol class="carousel-indicators">
+							<li data-target="#profileGallery" data-slide-to="0"
+								class="active"></li>
+							<li data-target="#profileGallery" data-slide-to="1"></li>
+							<li data-target="#profileGallery" data-slide-to="2"></li>
+						</ol>
+						<!-- Carousel items -->
+						<div class="carousel-inner" style="height: 220px">
+							<div class="item active">
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption 2</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption 2</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+							</div>
+
+							<div class="item">
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption 2</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption 2</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+								<div class="span3">
+									<div class="caption">
+										<h5>Caption</h5>
+									</div>
+									<div class="thumbnail">
+										<img src="http://placehold.it/120x120" alt="">
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- Carousel nav -->
+						<a class="carousel-control left" href="#profileGallery"
+							data-slide="prev">&lsaquo;</a> <a class="carousel-control right"
+							href="#profileGallery" data-slide="next">&rsaquo;</a>
+					</div>
+				</div>
+				<div class="tab-pane" id="friends">
+					<div class="tabbable tabbable-bordered tabs-right">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#flToll" data-toggle="tab">Toll</a></li>
+							<li><a href="#flDoof" data-toggle="tab">Doof</a></li>
+						</ul>
+						<div class="tab-content" style="padding: 0">
+							<div class="tab-pane" id="flToll">tollllll</div>
+							<div class="tab-pane" id="flDoof">dooooof</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button onclick="editable();">edit Profile</button>
+	<button onclick="showProfile();">show Profile</button>
+</body>
+</html>

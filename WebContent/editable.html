@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<link href="http://jasny.github.com/bootstrap/assets/css/bootstrap.css"
+	rel="stylesheet" />
+	<script src="http://jasny.github.com/bootstrap/assets/js/bootstrap-fileupload.js"
+	type="text/javascript"></script>
+	<script src="http://jasny.github.com/bootstrap/assets/js/bootstrap-tab.js"
+	type="text/javascript"></script>
+	<script type="text/javascript">
+	    var editMode = false;
+	    var inheritsize = false;
+
+	    function editAll(editable, transfer) {
+	        if (editable == true || editable == false) {
+	            var edElements = $('.editable');
+	            $.each(edElements, function() {
+	                edit(this, editable, transfer);
+	            });
+	        }
+	        editMode = editable;
+	    }
+
+	    function edit(element, editable, transfer) {
+	    	// get the view-element
+	        var viewer = $(element).find('.editable-view');
+	    	// get the editor-element
+	        var editor = $(element).find('.editable-editor');
+	    	// switch to editable?
+	        if (editable) {
+	        	// hide viewer, show editor
+	            viewer.css('visibility', 'hidden');
+	            editor.css('visibility', 'visible');
+	            // inherit?
+	            if (inheritsize) {
+	            	// sizes!
+	                editor.css('height', viewer.css('height'));
+	                editor.css('width', viewer.css('width'));
+	            }
+	            // switch positioning
+	            viewer.css('position', 'absolute');
+	            editor.css('position', 'relative');
+	            // transfer data?
+	            if (transfer) {
+	            	// do the trigger-Method first
+	                var result = {value: null, done: false};
+	                $(element).trigger('edit', result);
+	                // if proceeding is wished...
+	                if (!result.done) {
+	                	// read value from trigger
+	                	var value = result.value;
+	                	// if there's none
+	                    if (value == null) {
+	                    	// look for an alternate data-element
+	                        var realData = viewer.find('.editable-data');
+	                        if (realData.length) {
+	                            viewer = realData;
+	                        }
+                            if (viewer.is('img')) {
+                                value = viewer.attr('src');
+                            } else {
+                                // get the value
+                                value = viewer.html();
+                            }
+	                    }
+	                	// write to the editor
+	                    var realEditor = editor.find('.editable-data');
+                        if (realEditor.length) {
+                            editor = realEditor;
+                        }
+	                    if (editor.is('textarea')) {
+	                        value = br2nl(value);
+	                    }
+                        if (editor.is('input[type="radio"]')) {
+                            $('input[name="' + editor.attr('name') + '"][value="' + value + '"]').attr('checked','checked');
+                        } else {
+	                        editor.val(value);
+                        }
+	                }
+	           } 
+	        } else {
+	            viewer.css('visibility', 'visible');
+	            viewer.css('position', 'relative');
+	            editor.css('visibility', 'hidden');
+	            editor.css('position', 'absolute');
+	            if (transfer) {
+	                var result = {
+	                    value: null,
+	                    done: false
+	                };
+	                $(element).trigger('view', result);
+	                if (!result.done) {
+	                    var value = result.value;
+	                    if (value == null) {
+	                        var realEditor = editor.find('.editable-data');
+	                        if (realEditor.length) {
+	                            editor = realEditor;
+	                        }
+	                        if (editor.is('textarea')) {
+	                            value = nl2br(editor.val());
+	                        } else if (editor.is('input[type="radio"]')) {
+                               value = $('input[name="' + editor.attr('name') + '"]:checked').val();
+                            } else {
+                               value = editor.val();
+                            }
+	                    }
+	                    if (viewer.is('img')) {
+	                        viewer.attr('src', value);
+	                    } else {
+	                        viewer.html(value);
+	                    }
+	                }
+	            }
+	        }
+	    }
+
+	    function nl2br(str, is_xhtml) {
+	        var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+	        return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag);
+	    }
+
+	    function br2nl(str) {
+	        return (str + '').replace(/<br\s*\/?>/mg, "\n");
+	    }
+
+	    $(document).ready(function() {
+	        editAll(false);
+	        $('#test4').on('view', function(event, result) {
+	            var src = $(this).find('.fileupload-preview').find('img').attr('src');
+	            result.value = src;
+	            result.done = true;
+	        });
+	    });
+	</script>
+	<div class="editable" id="test">
+	    <div class="editable-content">
+	        <p class="editable-view" style="visibility: visible;">Ein toller Text</p>
+	        <input type="text" class="editable-editor" style="visibility: hidden;">
+	    </div>
+	</div>
+	<div class="editable" id="test2" style="width:300px">
+	    <div class="editable-content">
+	        <p class="editable-view" style="visibility: visible;">Ein tollererer Text</p>
+	        <textarea class="editable-editor" style="visibility: hidden;"></textarea>
+	    </div>
+	</div>
+	<div class="editable" id="test3" style="width:200px">
+	    <div class="editable-content">
+	        <p class="editable-view" style="visibility: visible;">Eine Auswahl</p>
+	        <select class="editable-editor" style="visibility: hidden; ">
+	            <option>Keine Auswahl</option>
+	            <option>Eine Auswahl</option>
+	            <option>Meine Auswahl</option>
+	            <option>Deine Auswahl</option>
+	        </select>
+	    </div>
+	</div>
+	<div class="editable" id="test4" style="height:200px; width:200px">
+	    <div class="editable-content">
+	        <div class="editable-view">
+                <img class="editable-data" src="http://placehold.it/160x160.png" style="visibility: visible; max-height:160px"/>
+	        </div>
+	        <div class="editable-editor editable-fileupload">
+	            <div class="fileupload fileupload-new" data-provides="fileupload">
+	                <div class="fileupload-preview fileupload-exists thumbnail" style="width: 160px; height: 160px;"></div>
+	                <div class="fileupload-preview fileupload-new thumbnail" style="width: 160px; height: 160px; background:url('http://placehold.it/160x160.png')"></div>
+	                <div style="position:absolute; left:5px; bottom:0; width:100%">	<span class="btn btn-file"> 
+								<span class="fileupload-new"><i class="icon-file"></i></span> 
+	                    <span
+	                    class="fileupload-exists"><i class="icon-refresh"></i> 
+	                        </span>
+                        <input type="file"/>
+	                        </span>
+	                        <input style="width:100px; margin-bottom:0px" type="text" name="title"
+                        autocomplete="off" placeholder="Title"/>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+    <div class="editable" id="test5" style="width:200px">
+	    <div class="editable-content">
+            <img class="editable-view" src="http://placekitten.com/g/32/32" />
+            
+            <div class="editable-editor">
+                <label class="radio">
+                    <input class="editable-data" type="radio" name="Katze" value="http://placekitten.com/g/32/32"/>
+                    <img src="http://placekitten.com/g/32/32" style="height:32px; width:32px" />
+                </label>
+                <label class="radio">
+                    <input class="editable-data" type="radio" name="Katze" value="http://placekitten.com/32/32"/>
+                    <img src="http://placekitten.com/32/32" style="height:32px; width:32px" />
+                </label>
+                <label class="radio">
+                    <input class="editable-data" type="radio" name="Katze" value="http://placehold.it/32x32.png"/>
+                     <img src="http://placehold.it/32x32.png" style="height:32px; width:32px"/>
+                </label>
+            </div>
+	    </div>
+	</div>
+	<br>
+	<br>
+	<a href="#" onclick="editAll(!editMode, true)">edit</a>
+
+	<a href="#" onclick="editAll(!editMode, false)">reset</a>
+
+</body>
+</html>
